@@ -12,6 +12,10 @@ algoritms/*.cmake
 algoritms/sorting/CMakeFiles/
 algoritms/sorting/Makefile
 algoritms/sorting/*.cmake
+algoritms/dynamic-programming/CMakeFiles/
+algoritms/dynamic-programming/Makefile
+algoritms/dynamic-programming/*.cmake
+
 
 data-structures/CMakeFiles/
 data-structures/Makefile
