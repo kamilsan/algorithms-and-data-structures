@@ -14,18 +14,19 @@ public:
 
   ~DynamicArray();
 
-  T& get(int index) const;
+  const T& get(int index) const;
   bool isEmpty() const;
   size_t size() const;
   size_t capacity() const;
 
+  T get(int index);
   void insert(const T& item);
   void clear();
 
   DynamicArray& operator=(DynamicArray& other);
   DynamicArray& operator=(DynamicArray&& other) noexcept;
   const T& operator[](size_t index) const;
-  T& operator[](size_t index);
+  T operator[](size_t index);
 
 private:
   size_t size_;
@@ -36,7 +37,7 @@ private:
 };
 
 template <typename T>
-DynamicArray<T>::DynamicArray(): size_(0), capacity_(5), buffer_(new T[capacity_]) {}
+DynamicArray<T>::DynamicArray(): size_(0), capacity_(4), buffer_(new T[capacity_]) {}
 
 template <typename T>
 DynamicArray<T>::DynamicArray(size_t capacity): size_(0), capacity_(capacity), buffer_(new T[capacity]) {}
@@ -69,7 +70,7 @@ DynamicArray<T>::~DynamicArray()
 }
 
 template <typename T>
-T& DynamicArray<T>::get(int index) const
+const T& DynamicArray<T>::get(int index) const
 {
   if(index < 0 || index >= size_) throw std::out_of_range("Index out of range!");
   return buffer_[index];
@@ -91,6 +92,13 @@ template <typename T>
 size_t DynamicArray<T>::capacity() const
 {
   return capacity_;
+}
+
+template <typename T>
+T DynamicArray<T>::get(int index)
+{
+  if(index < 0 || index >= size_) throw std::out_of_range("Index out of range!");
+  return buffer_[index];
 }
 
 template <typename T>
@@ -142,7 +150,7 @@ const T& DynamicArray<T>::operator[](size_t index) const
 }
 
 template <typename T>
-T& DynamicArray<T>::operator[](size_t index)
+T DynamicArray<T>::operator[](size_t index)
 {
   return buffer_[index];
 }

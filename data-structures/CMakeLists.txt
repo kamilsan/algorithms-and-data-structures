@@ -8,3 +8,7 @@ add_executable(dynamic-array
 add_executable(linked-list
   linked-list/linkedList.hpp
   linked-list/test.cpp)
+
+add_executable(heap
+  heap/heap.hpp
+  heap/test.cpp)
