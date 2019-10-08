@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "dynamic-array.hpp"
+#include "dynamicArray.hpp"
 
 void printDA(const DynamicArray<int>& arr)
 {

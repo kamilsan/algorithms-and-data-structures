@@ -9,14 +9,13 @@ The purpose of this repository is to gather implementations of the most popular 
   * Sorting:
 
     - [ ] Insertion sort
-    - [ ] Bubble sort
     - [ ] Merge sort
     - [ ] Quick sort
     - [ ] Heap sort
     - [ ] Counting sort
     - [ ] Radix sort
-
-    * [x] Selection sort
+    - [x] Bubble sort
+    - [x] Selection sort
 
   * Dynamic programming:
 
@@ -39,7 +38,6 @@ The purpose of this repository is to gather implementations of the most popular 
 * **Data structures:**
 
     - [ ] Heap
-    - [ ] Linked List
     - [ ] Doubly Linked List
     - [ ] XOR List
     - [ ] Queue
@@ -51,4 +49,5 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Graph
     - [ ] Fibonacci Heap
     - [ ] van Embe Boas Tree
+    - [x] Linked List
     - [x] Dynamic array
