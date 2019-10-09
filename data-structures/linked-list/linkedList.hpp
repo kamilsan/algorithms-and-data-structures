@@ -19,6 +19,7 @@ public:
   void for_each(std::function<void(const T&)> func) const;
 
   size_t size() const;
+  bool isEmpty() const;
   const T& get_front() const;
   bool contains(T item) const;
 
@@ -40,17 +41,18 @@ LinkedList<T>::LinkedList(): head_(nullptr), size_(0) {}
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList& other)
 {
-  size_ = other.size;
-  if(other.size == 0) return;
+  size_ = other.size_;
+  if(other.size_ == 0) return;
   head_ = new Node;
   head_->value = other.head_->value;
+  head_->next = nullptr;
 
   Node* cur = head_;
-  Node* curOther = other->head_->next;
+  Node* curOther = other.head_->next;
   while(curOther)
   {
     Node* newNode = new Node;
-    newNode = curOther->value;
+    newNode->value = curOther->value;
     cur->next = newNode;
 
     cur = newNode;
@@ -62,7 +64,7 @@ template <typename T>
 LinkedList<T>::LinkedList(LinkedList&& other) noexcept
 {
   head_ = other.head_;
-  size_ = other.size;
+  size_ = other.size_;
   other.head_ = nullptr;
 }
 
@@ -85,6 +87,7 @@ void LinkedList<T>::add_front(const T& item)
   newNode->value = item;
   newNode->next = head_;
   head_ = newNode;
+  size_++;
 }
 
 template <typename T>
@@ -104,6 +107,7 @@ bool LinkedList<T>::remove(const T& item)
         head_ = r->next;
       }
       delete r;
+      size_--;
 
       return true;
     }
@@ -146,6 +150,12 @@ size_t LinkedList<T>::size() const
 }
 
 template <typename T>
+bool LinkedList<T>::isEmpty() const
+{
+  return size_ == 0;
+}
+
+template <typename T>
 const T& LinkedList<T>::get_front() const
 {
   return head_->value;
@@ -169,7 +179,7 @@ bool LinkedList<T>::contains(T item) const
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList& other)
 {
-  if(*other == this) return *this;
+  if(this == &other) return *this;
 
   Node* cur = head_;
   while(cur)
@@ -179,17 +189,18 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList& other)
     delete r;
   }
 
-  size_ = other.size;
-  if(other.size == 0) return *this;
+  size_ = other.size_;
+  if(other.size_ == 0) return *this;
   head_ = new Node;
   head_->value = other.head_->value;
+  head_->next = nullptr;
 
   cur = head_;
-  Node* curOther = other->head_->next;
+  Node* curOther = other.head_->next;
   while(curOther)
   {
     Node* newNode = new Node;
-    newNode = curOther->value;
+    newNode->value = curOther->value;
     cur->next = newNode;
     
     cur = newNode;
@@ -203,7 +214,7 @@ template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(LinkedList&& other) noexcept
 {
   head_ = other.head_;
-  size_ = other.size;
+  size_ = other.size_;
   other.head_ = nullptr;
 
   return *this;

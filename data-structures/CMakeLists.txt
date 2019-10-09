@@ -9,6 +9,18 @@ add_executable(linked-list
   linked-list/linkedList.hpp
   linked-list/test.cpp)
 
+add_executable(doubly-linked-list
+  doubly-linked-list/doublyLinkedList.hpp
+  doubly-linked-list/test.cpp)
+
+add_executable(stack
+  stack/stack.hpp
+  stack/test.cpp)
+
+add_executable(queue
+  queue/queue.hpp
+  queue/test.cpp)
+
 add_executable(heap
   heap/heap.hpp
   heap/test.cpp)

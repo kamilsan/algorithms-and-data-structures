@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "linkedList.hpp"
+#include "doublyLinkedList.hpp"
 
 int main()
 {
-  LinkedList<int> list;
+  DoublyLinkedList<int> list;
   list.add_front(12);
   list.add_front(42);
   list.add_front(53);
@@ -45,6 +45,29 @@ int main()
 
   std::cout << "Removing 12..." << std::endl;
   list.remove(12);
+  list.for_each([](const int& n) { std::cout << n << " ";});
+  std::cout << std::endl;
+
+  std::cout << "Removing 4..." << std::endl;
+  list.remove(4);
+  list.for_each([](const int& n) { std::cout << n << " ";});
+  std::cout << std::endl;
+
+  std::cout << "Removing 1..." << std::endl;
+  list.remove(1);
+  list.for_each([](const int& n) { std::cout << n << " ";});
+  std::cout << std::endl;
+
+  std::cout << "Adding some elements to the back..." << std::endl;
+  list.add_back(5);
+  list.add_back(7);
+  list.add_back(-2);
+
+  list.for_each([](const int& n) { std::cout << n << " ";});
+  std::cout << std::endl << "Back: " << list.get_back() << std::endl;
+
+  std::cout << "Removing 7..." << std::endl;
+  list.remove(7);
   list.for_each([](const int& n) { std::cout << n << " ";});
   std::cout << std::endl;
 

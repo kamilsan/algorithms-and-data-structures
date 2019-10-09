@@ -37,11 +37,7 @@ The purpose of this repository is to gather implementations of the most popular 
   
 * **Data structures:**
 
-    - [ ] Heap
-    - [ ] Doubly Linked List
     - [ ] XOR List
-    - [ ] Queue
-    - [ ] Stack
     - [ ] Hash set/map
     - [ ] BST
     - [ ] AVL
@@ -49,5 +45,9 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Graph
     - [ ] Fibonacci Heap
     - [ ] van Embe Boas Tree
+    - [x] Heap
+    - [x] Queue
+    - [x] Stack
     - [x] Linked List
+    - [x] Doubly Linked List
     - [x] Dynamic array

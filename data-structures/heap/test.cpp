@@ -2,8 +2,8 @@
 
 #include "heap.hpp"
 
-template <typename T>
-void printHeap(const Heap<T>& heap)
+template <typename T, typename C>
+void printHeap(const Heap<T, C>& heap)
 {
   for(size_t i = 0; i < heap.size(); ++i)
   {
@@ -15,7 +15,7 @@ void printHeap(const Heap<T>& heap)
 
 int main()
 {
-  Heap<int> heap;
+  Heap<int, std::greater<int>> heap;
   heap.insert(2);
   heap.insert(5);
   heap.insert(-1);
