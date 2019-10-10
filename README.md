@@ -8,11 +8,11 @@ The purpose of this repository is to gather implementations of the most popular 
 
   * Sorting:
 
-    - [ ] Merge sort
     - [ ] Quick sort
     - [ ] Heap sort
     - [ ] Counting sort
     - [ ] Radix sort
+    - [x] Merge sort
     - [x] Insertion sort
     - [x] Bubble sort
     - [x] Selection sort
@@ -37,6 +37,7 @@ The purpose of this repository is to gather implementations of the most popular 
   
 * **Data structures:**
 
+    - [ ] Priority Queue
     - [ ] XOR List
     - [ ] Hash set/map
     - [ ] BST

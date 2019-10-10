@@ -5,6 +5,7 @@
 #include "selection-sort/selectionSort.hpp"
 #include "bubble-sort/bubbleSort.hpp"
 #include "insertion-sort/insertionSort.hpp"
+#include "merge-sort/mergeSort.hpp"
 
 void randomizeVector(unsigned n, std::vector<int>& v, std::function<int()> rng)
 {
@@ -29,7 +30,8 @@ int main()
   auto sortingMethods = {
       std::make_pair("Bubble sort", bubbleSort<int>),
       std::make_pair("Selection sort", selectionSort<int>),
-      std::make_pair("Insertion sort", insertionSort<int>)
+      std::make_pair("Insertion sort", insertionSort<int>),
+      std::make_pair("Merge sort", mergeSort<int>)
     };
   
   for(auto method : sortingMethods)
