@@ -16,12 +16,12 @@ public:
   void add_front(const T& item);
   bool remove(const T& item);
   T remove_front();
-  void for_each(std::function<void(const T&)> func) const;
+  void for_each(std::function<void(const T&)> func) const noexcept;
 
-  size_t size() const;
-  bool isEmpty() const;
-  const T& get_front() const;
-  bool contains(T item) const;
+  size_t size() const noexcept;
+  bool isEmpty() const noexcept;
+  const T& get_front() const noexcept;
+  bool contains(T item) const noexcept;
 
   LinkedList& operator=(const LinkedList& other);
   LinkedList& operator=(LinkedList&& other) noexcept;
@@ -133,7 +133,7 @@ T LinkedList<T>::remove_front()
 }
 
 template <typename T>
-void LinkedList<T>::for_each(std::function<void(const T&)> func) const
+void LinkedList<T>::for_each(std::function<void(const T&)> func) const noexcept
 {
   Node* cur = head_;
   while(cur)
@@ -144,25 +144,25 @@ void LinkedList<T>::for_each(std::function<void(const T&)> func) const
 }
 
 template <typename T>
-size_t LinkedList<T>::size() const
+size_t LinkedList<T>::size() const noexcept
 {
   return size_;
 }
 
 template <typename T>
-bool LinkedList<T>::isEmpty() const
+bool LinkedList<T>::isEmpty() const noexcept
 {
   return size_ == 0;
 }
 
 template <typename T>
-const T& LinkedList<T>::get_front() const
+const T& LinkedList<T>::get_front() const noexcept
 {
   return head_->value;
 }
 
 template <typename T>
-bool LinkedList<T>::contains(T item) const
+bool LinkedList<T>::contains(T item) const noexcept
 {
   Node* cur = head_;
   while(cur)

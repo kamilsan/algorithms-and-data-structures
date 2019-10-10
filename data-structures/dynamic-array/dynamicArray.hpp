@@ -15,9 +15,9 @@ public:
   ~DynamicArray();
 
   const T& get(int index) const;
-  bool isEmpty() const;
-  size_t size() const;
-  size_t capacity() const;
+  bool isEmpty() const noexcept;
+  size_t size() const noexcept;
+  size_t capacity() const noexcept;
 
   T get(int index);
   void insert(const T& item);
@@ -77,19 +77,19 @@ const T& DynamicArray<T>::get(int index) const
 }
 
 template <typename T>
-bool DynamicArray<T>::isEmpty() const
+bool DynamicArray<T>::isEmpty() const noexcept 
 {
   return size_ == 0;
 }
 
 template <typename T>
-size_t DynamicArray<T>::size() const
+size_t DynamicArray<T>::size() const noexcept
 {
   return size_;
 }
 
 template <typename T>
-size_t DynamicArray<T>::capacity() const
+size_t DynamicArray<T>::capacity() const noexcept
 {
   return capacity_;
 }

@@ -12,9 +12,9 @@ public:
   T pop();
   void push(const T& item);
 
-  const T& peek() const;
-  size_t size() const;
-  bool isEmpty() const;
+  const T& peek() const noexcept;
+  size_t size() const noexcept;
+  bool isEmpty() const noexcept;
 private:
   LinkedList<T> list_;
 };
@@ -38,19 +38,19 @@ void Stack<T>::push(const T& item)
 }
 
 template <typename T>
-const T& Stack<T>::peek() const
+const T& Stack<T>::peek() const noexcept
 {
   return list_.get_front();
 }
 
 template <typename T>
-size_t Stack<T>::size() const
+size_t Stack<T>::size() const noexcept
 {
   return list_.size();
 }
 
 template <typename T>
-bool Stack<T>::isEmpty() const
+bool Stack<T>::isEmpty() const noexcept
 {
   return list_.isEmpty();
 }

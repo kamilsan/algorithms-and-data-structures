@@ -15,12 +15,12 @@ public:
 
   ~Heap();
 
-  T peek() const;
+  T peek() const noexcept;
   const T& get(int index) const;
-  bool contains(const T& item) const;
-  bool isEmpty() const;
-  size_t size() const;
-  size_t capacity() const;
+  bool contains(const T& item) const noexcept;
+  bool isEmpty() const noexcept;
+  size_t size() const noexcept;
+  size_t capacity() const noexcept;
 
   T pop();
   T get(int index);
@@ -40,9 +40,9 @@ private:
 
   void resize();
 
-  int parent(int idx) const;
-  int leftChild(int idx) const;
-  int rightChild(int idx) const;
+  int parent(int idx) const noexcept;
+  int leftChild(int idx) const noexcept;
+  int rightChild(int idx) const noexcept;
 
   void bubbleUp(int idx);
   void bubbleDown(int idx);
@@ -85,7 +85,7 @@ Heap<T, C>::~Heap()
 }
 
 template <typename T, typename C>
-T Heap<T, C>::peek() const
+T Heap<T, C>::peek() const noexcept
 {
   return buffer_[0];
 }
@@ -98,7 +98,7 @@ const T& Heap<T, C>::get(int index) const
 }
 
 template <typename T, typename C>
-bool Heap<T, C>::contains(const T& item) const
+bool Heap<T, C>::contains(const T& item) const noexcept
 {
   for(size_t i = 0; i < size_; ++i)
   {
@@ -108,19 +108,19 @@ bool Heap<T, C>::contains(const T& item) const
 }
 
 template <typename T, typename C>
-bool Heap<T, C>::isEmpty() const
+bool Heap<T, C>::isEmpty() const noexcept 
 {
   return size_ == 0;
 }
 
 template <typename T, typename C>
-size_t Heap<T, C>::size() const
+size_t Heap<T, C>::size() const noexcept
 {
   return size_;
 }
 
 template <typename T, typename C>
-size_t Heap<T, C>::capacity() const
+size_t Heap<T, C>::capacity() const noexcept
 {
   return capacity_;
 }
@@ -232,19 +232,19 @@ void Heap<T, C>::resize()
 }
 
 template <typename T, typename C>
-int Heap<T, C>::parent(int idx) const
+inline int Heap<T, C>::parent(int idx) const noexcept
 {
   return (idx - 1) / 2; 
 }
 
 template <typename T, typename C>
-int Heap<T, C>::leftChild(int idx) const
+inline int Heap<T, C>::leftChild(int idx) const noexcept
 {
   return 2*idx + 1;
 }
 
 template <typename T, typename C>
-int Heap<T, C>::rightChild(int idx) const
+inline int Heap<T, C>::rightChild(int idx) const noexcept
 {
   return 2*idx + 2;
 }

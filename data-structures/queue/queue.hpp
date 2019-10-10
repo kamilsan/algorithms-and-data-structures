@@ -13,10 +13,10 @@ public:
   T dequeue();
   void enqueue(const T& item);
 
-  const T& front() const;
-  const T& back() const;
-  size_t size() const;
-  bool isEmpty() const;
+  const T& front() const noexcept;
+  const T& back() const noexcept;
+  size_t size() const noexcept;
+  bool isEmpty() const noexcept;
 private:
   DoublyLinkedList<T> list_;
 };
@@ -46,25 +46,25 @@ void Queue<T>::enqueue(const T& item)
 }
 
 template <typename T>
-const T& Queue<T>::front() const
+const T& Queue<T>::front() const noexcept
 {
   return list_.get_front();
 }
 
 template <typename T>
-const T& Queue<T>::back() const
+const T& Queue<T>::back() const noexcept
 {
   return list_.get_back();
 }
 
 template <typename T>
-size_t Queue<T>::size() const
+size_t Queue<T>::size() const noexcept
 {
   return list_.size();
 }
 
 template <typename T>
-bool Queue<T>::isEmpty() const
+bool Queue<T>::isEmpty() const noexcept
 {
   return list_.isEmpty();
 }

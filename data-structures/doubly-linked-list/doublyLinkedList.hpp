@@ -18,13 +18,13 @@ public:
   T remove_front();
   T remove_back();
   bool remove(const T& item);
-  void for_each(std::function<void(const T&)> func) const;
+  void for_each(std::function<void(const T&)> func) const noexcept;
 
-  size_t size() const;
-  bool isEmpty() const;
-  const T& get_front() const;
-  const T& get_back() const;
-  bool contains(T item) const;
+  size_t size() const noexcept;
+  bool isEmpty() const noexcept;
+  const T& get_front() const noexcept;
+  const T& get_back() const noexcept;
+  bool contains(T item) const noexcept;
 
   DoublyLinkedList& operator=(const DoublyLinkedList& other);
   DoublyLinkedList& operator=(DoublyLinkedList&& other) noexcept;
@@ -205,7 +205,7 @@ T DoublyLinkedList<T>::remove_back()
 }
 
 template <typename T>
-void DoublyLinkedList<T>::for_each(std::function<void(const T&)> func) const
+void DoublyLinkedList<T>::for_each(std::function<void(const T&)> func) const noexcept
 {
   Node* cur = head_;
   while(cur)
@@ -216,31 +216,31 @@ void DoublyLinkedList<T>::for_each(std::function<void(const T&)> func) const
 }
 
 template <typename T>
-size_t DoublyLinkedList<T>::size() const
+size_t DoublyLinkedList<T>::size() const noexcept
 {
   return size_;
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::isEmpty() const
+bool DoublyLinkedList<T>::isEmpty() const noexcept
 {
   return size_ == 0;
 }
 
 template <typename T>
-const T& DoublyLinkedList<T>::get_front() const
+const T& DoublyLinkedList<T>::get_front() const noexcept
 {
   return head_->value;
 }
 
 template <typename T>
-const T& DoublyLinkedList<T>::get_back() const
+const T& DoublyLinkedList<T>::get_back() const noexcept
 {
   return tail_->value;
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::contains(T item) const
+bool DoublyLinkedList<T>::contains(T item) const noexcept
 {
   Node* cur = head_;
   while(cur)
