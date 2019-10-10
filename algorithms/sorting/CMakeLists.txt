@@ -4,4 +4,5 @@ project(AlgorithmsDataStructures)
 add_executable(sorting
   bubble-sort/bubbleSort.hpp
   selection-sort/selectionSort.hpp
+  insertion-sort/insertionSort.hpp
   test.cpp)
