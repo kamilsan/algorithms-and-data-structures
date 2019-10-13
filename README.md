@@ -12,6 +12,7 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Heap sort
     - [ ] Counting sort
     - [ ] Radix sort
+    - [x] Shell sort
     - [x] Merge sort
     - [x] Insertion sort
     - [x] Bubble sort
