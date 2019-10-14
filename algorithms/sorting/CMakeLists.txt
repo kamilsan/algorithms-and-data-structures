@@ -7,4 +7,5 @@ add_executable(sorting
   insertion-sort/insertionSort.hpp
   merge-sort/mergeSort.hpp
   shell-sort/shellSort.hpp
+  quick-sort/quickSort.hpp
   test.cpp)

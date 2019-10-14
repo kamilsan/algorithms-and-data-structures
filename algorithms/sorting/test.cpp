@@ -7,6 +7,7 @@
 #include "insertion-sort/insertionSort.hpp"
 #include "merge-sort/mergeSort.hpp"
 #include "shell-sort/shellSort.hpp"
+#include "quick-sort/quickSort.hpp"
 
 void randomizeVector(unsigned n, std::vector<int>& v, std::function<int()> rng)
 {
@@ -20,7 +21,7 @@ void randomizeVector(unsigned n, std::vector<int>& v, std::function<int()> rng)
 
 int main()
 {
-  constexpr unsigned numElements = 1'000'00;
+  constexpr unsigned numElements = 100'000;
   std::vector<int> nums(numElements);
   std::cout << "Array size: " << numElements << std::endl;
   
@@ -33,7 +34,8 @@ int main()
       std::make_pair("Selection sort", selectionSort<int>),
       std::make_pair("Insertion sort", insertionSort<int>),
       std::make_pair("Merge sort", mergeSort<int>),
-      std::make_pair("Shell sort", shellSort<int>)
+      std::make_pair("Shell sort", shellSort<int>),
+      std::make_pair("Quick sort", quickSort<int>),
     };
   
   for(auto method : sortingMethods)

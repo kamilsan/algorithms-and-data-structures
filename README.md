@@ -8,10 +8,10 @@ The purpose of this repository is to gather implementations of the most popular 
 
   * Sorting:
 
-    - [ ] Quick sort
     - [ ] Heap sort
     - [ ] Counting sort
     - [ ] Radix sort
+    - [x] Quick sort
     - [x] Shell sort
     - [x] Merge sort
     - [x] Insertion sort
