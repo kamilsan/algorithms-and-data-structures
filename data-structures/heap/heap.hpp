@@ -8,7 +8,7 @@ template <typename T, typename C = std::less<T>>
 class Heap
 {
 public:
-  Heap(int capacity);
+  Heap(size_t capacity);
   Heap(): Heap(4) {}
   Heap(const Heap& other);
   Heap(Heap&& other) noexcept;
@@ -16,22 +16,22 @@ public:
   ~Heap();
 
   T peek() const noexcept;
-  const T& get(int index) const;
+  const T& get(size_t index) const;
   bool contains(const T& item) const noexcept;
   bool isEmpty() const noexcept;
   size_t size() const noexcept;
   size_t capacity() const noexcept;
 
   T pop();
-  T get(int index);
+  T get(size_t index);
   bool removeMinMax();
   void insert(const T& item);
   bool remove(const T& item);
 
   Heap& operator=(const Heap& other);
   Heap& operator=(Heap&& other) noexcept;
-  const T& operator[](int index) const;
-  T operator[](int index);
+  const T& operator[](size_t index) const;
+  T operator[](size_t index);
 
 private:
   T* buffer_;
@@ -40,16 +40,16 @@ private:
 
   void resize();
 
-  int parent(int idx) const noexcept;
-  int leftChild(int idx) const noexcept;
-  int rightChild(int idx) const noexcept;
+  size_t parent(size_t idx) const noexcept;
+  size_t leftChild(size_t idx) const noexcept;
+  size_t rightChild(size_t idx) const noexcept;
 
-  void bubbleUp(int idx);
-  void bubbleDown(int idx);
+  void bubbleUp(size_t idx);
+  void bubbleDown(size_t idx);
 };
 
 template <typename T, typename C>
-Heap<T, C>::Heap(int capacity)
+Heap<T, C>::Heap(size_t capacity)
 {
   capacity_ = capacity;
   buffer_ = new T[capacity_];
@@ -91,7 +91,7 @@ T Heap<T, C>::peek() const noexcept
 }
 
 template <typename T, typename C>
-const T& Heap<T, C>::get(int index) const
+const T& Heap<T, C>::get(size_t index) const
 {
   if(index < 0 || index >= size_) throw std::out_of_range("Index out of range!");
   return buffer_[index];
@@ -134,7 +134,7 @@ T Heap<T, C>::pop()
 }
 
 template <typename T, typename C>
-T Heap<T, C>::get(int index)
+T Heap<T, C>::get(size_t index)
 {
   if(index < 0 || index >= size_) throw std::out_of_range("Index out of range!");
   return buffer_[index];
@@ -205,13 +205,13 @@ Heap<T, C>& Heap<T, C>::operator=(Heap&& other) noexcept
 }
 
 template <typename T, typename C>
-const T& Heap<T, C>::operator[](int index) const
+const T& Heap<T, C>::operator[](size_t index) const
 {
   return buffer_[index];
 }
 
 template <typename T, typename C>
-T Heap<T, C>::operator[](int index)
+T Heap<T, C>::operator[](size_t index)
 {
   return buffer_[index];
 }
@@ -232,25 +232,25 @@ void Heap<T, C>::resize()
 }
 
 template <typename T, typename C>
-inline int Heap<T, C>::parent(int idx) const noexcept
+inline size_t Heap<T, C>::parent(size_t idx) const noexcept
 {
   return (idx - 1) / 2; 
 }
 
 template <typename T, typename C>
-inline int Heap<T, C>::leftChild(int idx) const noexcept
+inline size_t Heap<T, C>::leftChild(size_t idx) const noexcept
 {
   return 2*idx + 1;
 }
 
 template <typename T, typename C>
-inline int Heap<T, C>::rightChild(int idx) const noexcept
+inline size_t Heap<T, C>::rightChild(size_t idx) const noexcept
 {
   return 2*idx + 2;
 }
 
 template <typename T, typename C>
-void Heap<T, C>::bubbleUp(int idx)
+void Heap<T, C>::bubbleUp(size_t idx)
 {
   size_t curIdx = idx;
   size_t parentIdx = parent(curIdx);
@@ -267,7 +267,7 @@ void Heap<T, C>::bubbleUp(int idx)
 }
 
 template <typename T, typename C>
-void Heap<T, C>::bubbleDown(int idx)
+void Heap<T, C>::bubbleDown(size_t idx)
 {
   size_t curIdx = idx;
   size_t leftChildIdx = leftChild(curIdx);
