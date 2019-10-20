@@ -44,7 +44,6 @@ private:
   void copy(Node*& dst, Node* src);
   void destroy(Node*& node);
   void traverse(Node* node, std::function<void(T&)> fun, TraversalOrder order);
-  void traverse(Node* node, std::function<void(const T&)> fun, TraversalOrder order) const;
   void remove(Node*& node, Node* parent);
 };
 
@@ -139,7 +138,7 @@ void BST<T, C>::traverse(std::function<void(T&)> fun, TraversalOrder order)
 template <typename T, typename C>
 void BST<T, C>::traverse(std::function<void(const T&)> fun, TraversalOrder order) const
 {
-  traverse(root_, fun, order);
+  const_cast<BST<T, C>*>(this)->traverse(root_, fun, order);
 }
 
 template <typename T, typename C>
@@ -192,51 +191,6 @@ BST<T, C>& BST<T, C>::operator=(BST&& other) noexcept
 
 template <typename T, typename C>
 void BST<T, C>::traverse(Node* node, std::function<void(T&)> fun, TraversalOrder order)
-{
-  if(!node) return;
-  switch(order)
-  {
-    case TraversalOrder::LevelOrder:
-    {
-      Queue<Node*> queue;
-      queue.enqueue(root_);
-      while(!queue.isEmpty())
-      {
-        auto cur = queue.dequeue();
-        fun(cur->value);
-        if(cur->left)
-          queue.enqueue(cur->left);
-        if(cur->right)
-          queue.enqueue(cur->right);
-      }
-      break;
-    }
-    case TraversalOrder::PreOrder:
-    {
-      fun(node->value);
-      traverse(node->left, fun, order);
-      traverse(node->right, fun, order);
-      break;
-    }
-    case TraversalOrder::InOrder:
-    {
-      traverse(node->left, fun, order);
-      fun(node->value);
-      traverse(node->right, fun, order);
-      break;
-    }
-    case TraversalOrder::PostOrder:
-    {
-      traverse(node->left, fun, order);
-      traverse(node->right, fun, order);
-      fun(node->value);
-      break;
-    }
-  }
-}
-
-template <typename T, typename C>
-void BST<T, C>::traverse(Node* node, std::function<void(const T&)> fun, TraversalOrder order) const
 {
   if(!node) return;
   switch(order)
