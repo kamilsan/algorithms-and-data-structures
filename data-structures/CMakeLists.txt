@@ -24,3 +24,7 @@ add_executable(queue
 add_executable(heap
   heap/heap.hpp
   heap/test.cpp)
+
+add_executable(bst
+  bst/bst.hpp
+  bst/test.cpp)
