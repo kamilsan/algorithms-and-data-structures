@@ -16,11 +16,15 @@ void printHeap(const Heap<T, C>& heap)
 int main()
 {
   Heap<int, std::greater<int>> heap;
+  heap.insert(43);
+  heap.insert(15);
+  heap.insert(8);
+  heap.insert(10);
+  heap.insert(12);
+  heap.insert(1);
   heap.insert(2);
-  heap.insert(5);
-  heap.insert(-1);
-  heap.insert(3);
-  heap.insert(4);
+  heap.insert(9);
+  heap.insert(10);
   printHeap(heap);
   std::cout << "Size: " << heap.size() << ", capacity: " << heap.capacity() << std::endl;
   std::cout << "Peek: " << heap.peek() << std::endl;
@@ -31,28 +35,21 @@ int main()
 
   heap.contains(5) ? std::cout << "Heap contains 5." : std::cout << "Heap does not contain 5.";
   std::cout << std::endl;
-  heap.contains(42) ? std::cout << "Heap contains 42." : std::cout << "Heap does not contain 42.";
+  heap.contains(12) ? std::cout << "Heap contains 12." : std::cout << "Heap does not contain 12.";
   std::cout << std::endl;
-
-  heap.insert(43);
-  heap.insert(0);
-  heap.insert(3);
-  heap.insert(7);
-  heap.insert(15);
-  printHeap(heap);
 
   std::cout << "Peek: " << heap.peek() << std::endl;
 
-  std::cout << "Remove 3" << std::endl;
-  heap.remove(3);
+  std::cout << "Remove 2" << std::endl;
+  heap.remove(2);
   printHeap(heap);
 
-  std::cout << "Remove 0" << std::endl;
-  heap.remove(0);
+  std::cout << "Remove 10" << std::endl;
+  heap.remove(10);
   printHeap(heap);
 
-  std::cout << "Remove 7" << std::endl;
-  heap.remove(7);
+  std::cout << "Remove 8" << std::endl;
+  heap.remove(8);
   printHeap(heap);
 
   std::cout << "Peek: " << heap.peek() << std::endl;

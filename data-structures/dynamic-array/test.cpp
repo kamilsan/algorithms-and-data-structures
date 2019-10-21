@@ -36,5 +36,10 @@ int main()
     printDAInfo(array);
   }
 
+  std::cout << std::endl << "array[4] = 3" << std::endl;
+  array[4] = 3;
+  printDA(array);
+  printDAInfo(array);
+
   return 0;
 }

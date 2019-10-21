@@ -15,7 +15,7 @@ public:
 
   ~Heap();
 
-  T peek() const noexcept;
+  const T& peek() const noexcept;
   const T& get(size_t index) const;
   bool contains(const T& item) const noexcept;
   bool isEmpty() const noexcept;
@@ -23,7 +23,6 @@ public:
   size_t capacity() const noexcept;
 
   T pop();
-  T get(size_t index);
   bool removeMinMax();
   void insert(const T& item);
   bool remove(const T& item);
@@ -31,7 +30,6 @@ public:
   Heap& operator=(const Heap& other);
   Heap& operator=(Heap&& other) noexcept;
   const T& operator[](size_t index) const;
-  T operator[](size_t index);
 
 private:
   T* buffer_;
@@ -85,7 +83,7 @@ Heap<T, C>::~Heap()
 }
 
 template <typename T, typename C>
-T Heap<T, C>::peek() const noexcept
+const T& Heap<T, C>::peek() const noexcept
 {
   return buffer_[0];
 }
@@ -131,13 +129,6 @@ T Heap<T, C>::pop()
   T val = buffer_[0];
   removeMinMax();
   return val;
-}
-
-template <typename T, typename C>
-T Heap<T, C>::get(size_t index)
-{
-  if(index < 0 || index >= size_) throw std::out_of_range("Index out of range!");
-  return buffer_[index];
 }
 
 template <typename T, typename C>
@@ -211,13 +202,6 @@ const T& Heap<T, C>::operator[](size_t index) const
 }
 
 template <typename T, typename C>
-T Heap<T, C>::operator[](size_t index)
-{
-  return buffer_[index];
-}
-
-
-template <typename T, typename C>
 void Heap<T, C>::resize()
 {
   size_t newCapacity = 2*capacity_;
@@ -253,14 +237,14 @@ template <typename T, typename C>
 void Heap<T, C>::bubbleUp(size_t idx)
 {
   size_t curIdx = idx;
-  size_t parentIdx = parent(curIdx);
-  while(parentIdx >= 0)
+  size_t parentIdx = 0;
+  while(curIdx != 0)
   {
+    parentIdx = parent(curIdx);
     if(C()(buffer_[curIdx], buffer_[parentIdx]))
     {
       std::swap(buffer_[curIdx], buffer_[parentIdx]);
       curIdx = parentIdx;
-      parentIdx = parent(curIdx);
     }
     else break;
   }
