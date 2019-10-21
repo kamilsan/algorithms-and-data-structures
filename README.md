@@ -23,8 +23,8 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] LCS
     - [ ] Knapsack
     - [ ] Rod cutting
-    - [x] LPS (only length is calculated)
-    - [x] Edit distance (ditto)
+    - [x] LPS
+    - [x] Edit distance (only length is calculated)
     - [x] LIS (ditto)
 
   * Graphs:

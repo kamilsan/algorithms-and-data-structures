@@ -4,10 +4,9 @@
 
 int main()
 {
-  std::string testString = "no lemon, no melon!";
-  int lpsLen = lps(testString);
-  std::cout << "Longest palindromic subsequance in string " 
-    << testString << " has length of " << lpsLen << std::endl;
+  std::string testString = "dno lerwmon, nyo melryofn!";
+  std::cout << "Longest palindromic subsequence in string " 
+    << testString << " is \"" << lps(testString) << "\"" << std::endl;
 
   return 0;
 }

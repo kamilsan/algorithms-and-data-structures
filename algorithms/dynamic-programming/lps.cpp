@@ -1,10 +1,11 @@
 #include "declarations.hpp"
 
-int lps(const std::string& str)
+#include <iostream>
+
+std::string lps(const std::string& str)
 {
   int n = str.size();
   int* dp = new int[n*n];
-  int sol = 0;
   
   auto map = [&](int i, int j) -> int { return j*n+i; };
   
@@ -33,9 +34,31 @@ int lps(const std::string& str)
     }
   }
   
-  sol = dp[map(0, n-1)];
-  
+  int sol = dp[map(0, n-1)];
+  std::string result(sol, ' ');
+  result.reserve(sol);
+  int i = 0;
+  int j = n - 1;
+  int head = 0;
+
+  while(i < j)
+  {
+    if(str[i] == str[j])
+    {
+      result[head] = str[i];
+      result[sol - head - 1] = str[i];
+      i += 1;
+      j -= 1;
+      head += 1;
+    }
+    else if(dp[map(i, j-1)] > dp[map(i+1, j)])
+      j -= 1;
+    else
+      i += 1;
+  }
   delete[] dp;
+  if(i == j) 
+    result[head] = str[i];
   
-  return sol;
+  return result;
 }
