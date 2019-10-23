@@ -1,7 +1,5 @@
 #include "declarations.hpp"
 
-#include <iostream>
-
 std::string lps(const std::string& str)
 {
   int n = str.size();
@@ -34,9 +32,9 @@ std::string lps(const std::string& str)
     }
   }
   
-  int sol = dp[map(0, n-1)];
-  std::string result(sol, ' ');
-  result.reserve(sol);
+  int solutionLen = dp[map(0, n-1)];
+  std::string solution(solutionLen, ' ');
+  solution.reserve(solutionLen);
   int i = 0;
   int j = n - 1;
   int head = 0;
@@ -45,8 +43,8 @@ std::string lps(const std::string& str)
   {
     if(str[i] == str[j])
     {
-      result[head] = str[i];
-      result[sol - head - 1] = str[i];
+      solution[head] = str[i];
+      solution[solutionLen - head - 1] = str[i];
       i += 1;
       j -= 1;
       head += 1;
@@ -58,7 +56,7 @@ std::string lps(const std::string& str)
   }
   delete[] dp;
   if(i == j) 
-    result[head] = str[i];
+    solution[head] = str[i];
   
-  return result;
+  return solution;
 }

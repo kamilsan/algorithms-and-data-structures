@@ -4,7 +4,7 @@
 #include <string>
 
 //Longest Increasing Subsequence
-int lis(const std::vector<int>& nums);
+std::vector<int> lis(const std::vector<int>& nums);
 
 //Longest Palindromic Subsequence
 std::string lps(const std::string& str);

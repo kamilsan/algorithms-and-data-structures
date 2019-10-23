@@ -25,7 +25,7 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Rod cutting
     - [x] LPS
     - [x] Edit distance (only length is calculated)
-    - [x] LIS (ditto)
+    - [x] LIS
 
   * Graphs:
 
