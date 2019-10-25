@@ -8,8 +8,6 @@ class Queue
 public:
   Queue() = default;
 
-  T front();
-  T back();
   T dequeue();
   void enqueue(const T& item);
 
@@ -20,18 +18,6 @@ public:
 private:
   DoublyLinkedList<T> list_;
 };
-
-template <typename T>
-T Queue<T>::front()
-{
-  return list_.get_front();
-}
-
-template <typename T>
-T Queue<T>::back()
-{
-  return list_.get_back();
-}
 
 template <typename T>
 T Queue<T>::dequeue()

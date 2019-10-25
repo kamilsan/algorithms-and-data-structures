@@ -28,3 +28,7 @@ add_executable(heap
 add_executable(bst
   bst/bst.hpp
   bst/test.cpp)
+
+add_executable(priorityQueue
+  priority-queue/priorityQueue.hpp
+  priority-queue/test.cpp)

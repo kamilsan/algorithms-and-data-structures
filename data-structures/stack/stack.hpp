@@ -8,7 +8,6 @@ class Stack
 public:
   Stack() = default;
 
-  T peek();
   T pop();
   void push(const T& item);
 
@@ -18,12 +17,6 @@ public:
 private:
   LinkedList<T> list_;
 };
-
-template <typename T>
-T Stack<T>::peek()
-{
-  return list_.get_front();
-}
 
 template <typename T>
 T Stack<T>::pop()

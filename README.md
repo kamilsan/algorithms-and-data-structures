@@ -38,7 +38,6 @@ The purpose of this repository is to gather implementations of the most popular 
   
 * **Data structures:**
 
-    - [ ] Priority Queue
     - [ ] XOR List
     - [ ] Hash set/map
     - [ ] AVL
@@ -46,6 +45,7 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Graph
     - [ ] Fibonacci Heap
     - [ ] van Embe Boas Tree
+    - [x] Priority Queue
     - [x] BST
     - [x] Heap
     - [x] Queue
