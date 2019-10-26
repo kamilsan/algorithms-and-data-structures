@@ -24,7 +24,7 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Knapsack
     - [ ] Rod cutting
     - [x] LPS
-    - [x] Edit distance (only length is calculated)
+    - [x] Edit distance
     - [x] LIS
 
   * Graphs:

@@ -1,13 +1,11 @@
 #include "declarations.hpp"
 
-int editDistance(const std::string& s1, const std::string& s2)
+std::vector<EditOperation> editDistance(const std::string& s1, const std::string& s2)
 {
-  if(s1.size() == 0) return s2.size();
-  if(s2.size() == 0) return s1.size();
   int n1 = s1.size();
   int n2 = s2.size();
   int* dp = new int[(n1+1)*(n2+1)];
-  auto map = [&](int i, int j) -> int {return j*n1 + i;};
+  auto map = [&](int i, int j) -> int {return j*(n1+1) + i;};
   
   for(int i = 0; i <= n1; ++i)
   {
@@ -29,8 +27,63 @@ int editDistance(const std::string& s1, const std::string& s2)
     }
   }
   
-  int sol = dp[0];
+  int editDistance = dp[0];
+  std::vector<EditOperation> edits;
+  edits.reserve(editDistance);
+
+  int i = 0, j = 0;
+  while(i < n1 && j < n2)
+  {
+    if(s1[i] == s2[j])
+    {
+      i += 1;
+      j += 1;
+    }
+    else
+    {
+      int removalDistance = dp[map(i+1, j)];
+      int insertionDistance = dp[map(i, j+1)];
+      int replacementDistance = dp[map(i+1, j+1)];
+
+      int minDistance = removalDistance;
+
+      if(insertionDistance < minDistance)
+        minDistance = insertionDistance;
+      if(replacementDistance < minDistance)
+        minDistance = replacementDistance;
+
+      if(minDistance == replacementDistance)
+      {
+        edits.push_back({EditOperationType::Replace, s1[i], s2[j]});
+        i += 1;
+        j += 1;
+      }
+      else if(minDistance == insertionDistance)
+      {
+        edits.push_back({EditOperationType::Add, ' ', s2[j]});
+        j += 1;
+      }
+      else
+      {
+        edits.push_back({EditOperationType::Remove, s1[i], ' '});
+        i += 1;
+      }
+    }
+  }
+
+  while(i < n1)
+  {
+    edits.push_back({EditOperationType::Remove, s1[i], ' '});
+    i += 1;
+  }
+
+  while(j < n2)
+  {
+    edits.push_back({EditOperationType::Add, ' ', s2[j]});
+    j += 1;
+  }
+
   delete[] dp;
   
-  return sol;
+  return edits;
 }
