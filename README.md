@@ -20,9 +20,9 @@ The purpose of this repository is to gather implementations of the most popular 
 
   * Dynamic programming:
 
-    - [ ] LCS
     - [ ] Knapsack
     - [ ] Rod cutting
+    - [x] LCS
     - [x] LPS
     - [x] Edit distance
     - [x] LIS

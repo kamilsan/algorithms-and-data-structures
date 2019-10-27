@@ -9,6 +9,9 @@ std::vector<int> lis(const std::vector<int>& nums);
 // Longest Palindromic Subsequence
 std::string lps(const std::string& str);
 
+// Longest Common Subsequence
+std::string lcs(const std::string& s1, const std::string& s2);
+
 // Edit distance
 
 enum class EditOperationType { Add, Replace, Remove };
