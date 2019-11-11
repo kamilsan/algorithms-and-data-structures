@@ -40,11 +40,11 @@ The purpose of this repository is to gather implementations of the most popular 
 
     - [ ] XOR List
     - [ ] Hash set/map
-    - [ ] AVL
     - [ ] Red-Black tree
     - [ ] Graph
     - [ ] Fibonacci Heap
     - [ ] van Embe Boas Tree
+    - [x] AVL
     - [x] Priority Queue
     - [x] BST
     - [x] Heap

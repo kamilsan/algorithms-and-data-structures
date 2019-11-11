@@ -6,16 +6,16 @@
 #include "../queue/queue.hpp"
 
 template <typename T, typename compare = std::less<T>>
-class BST
+class AVL
 {
 public:
   enum class TraversalOrder { PreOrder, InOrder, PostOrder, LevelOrder };
 
-  BST();
-  BST(const BST& other);
-  BST(BST&& other) noexcept;
+  AVL();
+  AVL(const AVL& other);
+  AVL(AVL&& other) noexcept;
 
-  ~BST();
+  ~AVL();
 
   void insert(const T& item);
   bool remove(const T& item);
@@ -29,36 +29,48 @@ public:
   bool isEmpty() const noexcept;
   size_t size() const noexcept;
 
-  BST& operator=(const BST& other);
-  BST& operator=(BST&& other) noexcept;
+  AVL& operator=(const AVL& other);
+  AVL& operator=(AVL&& other) noexcept;
 private:
   struct Node
   {
+    Node(const T& val): value(val), left(nullptr), 
+      right(nullptr), parent(nullptr), height(0) {}
+
     T value;
     Node* left;
     Node* right;
+    Node* parent;
+    size_t height;
   };
+
   Node* root_;
   size_t size_;
 
-  void copy(Node*& dst, Node* src);
+  long height(Node* node) const noexcept;
+  void balance(Node* node);
+  void updateHeight(Node* node);
+  void rotateRight(Node* node);
+  void rotateLeft(Node* node);
+
+  void copy(Node*& dst, Node* src, Node* parent);
   void destroy(Node*& node);
   void traverse(Node* node, std::function<void(T&)> fun, TraversalOrder order);
-  void remove(Node*& node, Node* parent);
+  void removeImpl(Node*& node);
 };
 
 template <typename T, typename C>
-BST<T, C>::BST(): root_(nullptr), size_(0) {}
+AVL<T, C>::AVL(): root_(nullptr), size_(0) {}
 
 template <typename T, typename C>
-BST<T, C>::BST(const BST& other)
+AVL<T, C>::AVL(const AVL& other)
 {
   size_ = other.size_;
-  copy(root_, other.root_);
+  copy(root_, other.root_, nullptr);
 }
 
 template <typename T, typename C>
-BST<T, C>::BST(BST&& other) noexcept
+AVL<T, C>::AVL(AVL&& other) noexcept
 {
   root_ = other.root_;
   size_ = other.size_;
@@ -67,13 +79,13 @@ BST<T, C>::BST(BST&& other) noexcept
 }
 
 template <typename T, typename C>
-BST<T, C>::~BST()
+AVL<T, C>::~AVL()
 {
   destroy(root_);
 }
 
 template <typename T, typename C>
-void BST<T, C>::insert(const T& item)
+void AVL<T, C>::insert(const T& item)
 {
   Node* cur = root_;
   Node* parent = nullptr;
@@ -85,10 +97,8 @@ void BST<T, C>::insert(const T& item)
     else
       cur = cur->right;
   }
-  Node* newNode = new Node();
-  newNode->value = item;
-  newNode->left = nullptr;
-  newNode->right = nullptr;
+  Node* newNode = new Node(item);
+  newNode->parent = parent;
   if(parent)
   {
     if(C{}(item, parent->value))
@@ -98,52 +108,47 @@ void BST<T, C>::insert(const T& item)
   }
   else
     root_ = newNode;
-  
+
   size_++;
+
+  balance(parent);
 }
 
 template <typename T, typename C>
-bool BST<T, C>::remove(const T& item)
+bool AVL<T, C>::remove(const T& item)
 {
   Node* cur = root_;
-  Node* parent = nullptr;
   while(cur)
   {
     if(cur->value == item)
     {
-      remove(cur, parent);
+      removeImpl(cur);
       size_ -= 1;
       return true;
     }
     else if(C{}(item, cur->value))
-    {
-      parent = cur;
       cur = cur->left;
-    }
     else
-    {
-      parent = cur;
       cur = cur->right;
-    }
   }
 
   return false;
 }
 
 template <typename T, typename C>
-void BST<T, C>::traverse(std::function<void(T&)> fun, TraversalOrder order)
+void AVL<T, C>::traverse(std::function<void(T&)> fun, TraversalOrder order)
 {
   traverse(root_, fun, order);
 }
 
 template <typename T, typename C>
-void BST<T, C>::traverse(std::function<void(const T&)> fun, TraversalOrder order) const
+void AVL<T, C>::traverse(std::function<void(const T&)> fun, TraversalOrder order) const
 {
-  const_cast<BST<T, C>*>(this)->traverse(root_, fun, order);
+  const_cast<AVL<T, C>*>(this)->traverse(root_, fun, order);
 }
 
 template <typename T, typename C>
-bool BST<T, C>::contains(const T& item) const noexcept
+bool AVL<T, C>::contains(const T& item) const noexcept
 {
   Node* cur = root_;
   while(cur)
@@ -159,29 +164,29 @@ bool BST<T, C>::contains(const T& item) const noexcept
 }
 
 template <typename T, typename C>
-bool BST<T, C>::isEmpty() const noexcept
+bool AVL<T, C>::isEmpty() const noexcept
 {
   return size_ == 0;
 }
 
 template <typename T, typename C>
-size_t BST<T, C>::size() const noexcept
+size_t AVL<T, C>::size() const noexcept
 {
   return size_;
 }
 
 template <typename T, typename C>
-BST<T, C>& BST<T, C>::operator=(const BST& other)
+AVL<T, C>& AVL<T, C>::operator=(const AVL& other)
 {
   if(this == &other) return *this;
   if(root_) destroy(root_);
   size_ = other.size_;
-  copy(root_, other.root_);
+  copy(root_, other.root_, nullptr);
   return *this;
 }
 
 template <typename T, typename C>
-BST<T, C>& BST<T, C>::operator=(BST&& other) noexcept
+AVL<T, C>& AVL<T, C>::operator=(AVL&& other) noexcept
 {
   root_ = other.root_;
   size_ = other.size_;
@@ -191,7 +196,96 @@ BST<T, C>& BST<T, C>::operator=(BST&& other) noexcept
 }
 
 template <typename T, typename C>
-void BST<T, C>::traverse(Node* node, std::function<void(T&)> fun, TraversalOrder order)
+long AVL<T, C>::height(Node* node) const noexcept
+{
+  if(!node) return -1;
+  else return node->height;
+}
+
+template <typename T, typename C>
+void AVL<T, C>::balance(Node* node)
+{
+  while(node)
+  {
+    updateHeight(node);
+    if(height(node->right) >= height(node->left) + 2)
+    {
+      if(height(node->right->right) >= height(node->right->left))
+        rotateLeft(node);
+      else
+      {
+        rotateRight(node->right);
+        rotateLeft(node);
+      }
+    }
+    else if(height(node->left) >= height(node->right) + 2)
+    {
+      if(height(node->left->left) >= height(node->left->right))
+        rotateRight(node);
+      else
+      {
+        rotateLeft(node->left);
+        rotateRight(node);
+      }
+    }
+    node = node->parent;
+  }
+}
+
+template <typename T, typename C>
+void AVL<T, C>::updateHeight(Node* node)
+{  
+  node->height = 1 + std::max(height(node->right), height(node->left));
+}
+
+template <typename T, typename C>
+void AVL<T, C>::rotateRight(Node* node)
+{
+  Node* y = node->left;
+  y->parent = node->parent;
+  if(!y->parent)
+    root_ = y;
+  else
+  {
+    if(y->parent->right == node)
+      y->parent->right = y;
+    else
+      y->parent->left = y;
+  }
+  node->left = y->right;
+  node->parent = y;
+  if(y->right)
+    y->right->parent = node;
+  y->right = node;
+  updateHeight(node);
+  updateHeight(y);
+}
+
+template <typename T, typename C>
+void AVL<T, C>::rotateLeft(Node* node)
+{
+  Node* y = node->right;
+  y->parent = node->parent;
+  if(!y->parent)
+    root_ = y;
+  else
+  {
+    if(y->parent->right == node)
+      y->parent->right = y;
+    else
+      y->parent->left = y;
+  }
+  node->right = y->left;
+  node->parent = y;
+  if(y->left)
+    y->left->parent = node;
+  y->left = node;
+  updateHeight(node);
+  updateHeight(y);
+}
+
+template <typename T, typename C>
+void AVL<T, C>::traverse(Node* node, std::function<void(T&)> fun, TraversalOrder order)
 {
   if(!node) return;
   switch(order)
@@ -236,7 +330,7 @@ void BST<T, C>::traverse(Node* node, std::function<void(T&)> fun, TraversalOrder
 }
 
 template <typename T, typename C>
-void BST<T, C>::destroy(Node*& node)
+void AVL<T, C>::destroy(Node*& node)
 {
     if(!node) return;
     destroy(node->left);
@@ -245,38 +339,33 @@ void BST<T, C>::destroy(Node*& node)
 }
 
 template <typename T, typename C>
-void BST<T, C>::copy(Node*& dst, Node* src)
+void AVL<T, C>::copy(Node*& dst, Node* src, Node* parent)
 {
   if(!src) return;
-  Node* newNode = new Node;
-  newNode->value = src->value;
-  newNode->left = nullptr;
-  newNode->right = nullptr;
+  Node* newNode = new Node(src->value);
+  newNode->height = src->height;
+  newNode->parent = parent;
   dst = newNode;
-  copy(newNode->left, src->left);
-  copy(newNode->right, src->right);
+  copy(newNode->left, src->left, newNode);
+  copy(newNode->right, src->right, newNode);
 }
 
 template <typename T, typename C>
-void BST<T, C>::remove(Node*& node, Node* parent)
+void AVL<T, C>::removeImpl(Node*& node)
 {
   if(node->left && node->right)
   {
     Node* smallestNode = node->right;
-    Node* smallestNodeParent = node;
     while(smallestNode->left)
-    {
-      smallestNodeParent = smallestNode;
       smallestNode = smallestNode->left;
-    }
     
-    auto value = smallestNode->value;
-    node->value = value;
-    remove(smallestNode, smallestNodeParent);
+    node->value = smallestNode->value;
+    removeImpl(smallestNode);
   }
   else
   {
     Node* newChild = nullptr;
+    Node* parent = node->parent;
     if(node->left) newChild = node->left;
     else newChild = node->right;
 
@@ -287,8 +376,14 @@ void BST<T, C>::remove(Node*& node, Node* parent)
       else
         parent->right = newChild;
     }
-    else root_ = newChild;
+    else
+      root_ = newChild;
+
+    if(newChild)
+      newChild->parent = parent;
 
     delete node;
+
+    balance(parent);
   }
 }

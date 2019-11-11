@@ -32,3 +32,7 @@ add_executable(bst
 add_executable(priorityQueue
   priority-queue/priorityQueue.hpp
   priority-queue/test.cpp)
+
+add_executable(avl
+  avl/avl.hpp
+  avl/test.cpp)
