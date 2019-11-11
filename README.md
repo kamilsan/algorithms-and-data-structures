@@ -35,21 +35,35 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Bellman-Ford
     - [ ] A*
     - [ ] Floyd–Warshall
+
+  * String searching
+
+    - [ ] Knuth–Morris–Pratt
+    - [ ] Rabin–Karp
   
 * **Data structures:**
 
+  * Linear:
+
     - [ ] XOR List
-    - [ ] Hash set/map
-    - [ ] Red-Black tree
-    - [ ] Graph
-    - [ ] Fibonacci Heap
-    - [ ] van Embe Boas Tree
-    - [x] AVL
-    - [x] Priority Queue
-    - [x] BST
-    - [x] Heap
+    - [ ] Hash Set/Map
     - [x] Queue
     - [x] Stack
     - [x] Linked List
     - [x] Doubly Linked List
-    - [x] Dynamic array
+    - [x] Dynamic Array
+  
+  * Tree-based:
+
+    - [ ] Red-Black Tree
+    - [ ] Splay Tree
+    - [ ] van Emde Boas Tree
+    - [x] AVL
+    - [x] BST
+  
+  * Other:
+
+    - [ ] Graph
+    - [ ] Fibonacci Heap
+    - [x] Priority Queue
+    - [x] Heap
