@@ -36,7 +36,7 @@ int main()
     BST<int>::TraversalOrder::LevelOrder);
   std::cout << std::endl << std::endl;
 
-  int valuesToRemove[] = { 3, 2, 7, 40 };
+  int valuesToRemove[] = { 3, 2, 7, 40, 4, 6, 8, 9, 12, 30, 35, 41, 42, 45 };
 
   for(int value : valuesToRemove)
   {

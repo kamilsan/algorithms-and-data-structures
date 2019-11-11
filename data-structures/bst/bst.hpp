@@ -282,10 +282,14 @@ void BST<T, C>::remove(Node*& node, Node* parent)
     if(node->left) newChild = node->left;
     else newChild = node->right;
 
-    if(C{}(node->value, parent->value))
-      parent->left = newChild;
-    else
-      parent->right = newChild;
+    if(parent)
+    {
+      if(C{}(node->value, parent->value))
+        parent->left = newChild;
+      else
+        parent->right = newChild;
+    }
+    else root_ = newChild;
 
     delete node;
   }
