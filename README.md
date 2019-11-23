@@ -46,7 +46,8 @@ The purpose of this repository is to gather implementations of the most popular 
   * Linear:
 
     - [ ] XOR List
-    - [ ] Hash Set/Map
+    - [ ] Hash map
+    - [x] Hash set
     - [x] Queue
     - [x] Stack
     - [x] Linked List
@@ -66,4 +67,4 @@ The purpose of this repository is to gather implementations of the most popular 
     - [ ] Graph
     - [ ] Fibonacci Heap
     - [x] Priority Queue
-    - [x] Heap
+    - [x] Binary Heap

@@ -36,3 +36,7 @@ add_executable(priorityQueue
 add_executable(avl
   avl/avl.hpp
   avl/test.cpp)
+
+add_executable(hashset
+  hashset/hashset.hpp
+  hashset/test.cpp)
