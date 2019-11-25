@@ -40,6 +40,7 @@ The purpose of this repository is to gather implementations of the most popular 
 
     - [ ] Knuth–Morris–Pratt
     - [ ] Rabin–Karp
+    - [x] Naive search
   
 * **Data structures:**
 

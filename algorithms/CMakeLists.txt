@@ -3,3 +3,4 @@ project(AlgorithmsDataStructures)
 
 add_subdirectory(sorting)
 add_subdirectory(dynamic-programming)
+add_subdirectory(string-searching)
