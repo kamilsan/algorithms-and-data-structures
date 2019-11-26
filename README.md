@@ -38,8 +38,8 @@ The purpose of this repository is to gather implementations of the most popular 
 
   * String searching
 
-    - [ ] Knuth–Morris–Pratt
     - [ ] Rabin–Karp
+    - [x] Knuth–Morris–Pratt
     - [x] Naive search
   
 * **Data structures:**

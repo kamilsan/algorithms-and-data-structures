@@ -7,26 +7,28 @@
 std::vector<size_t> naiveSearch(std::string str, std::string pattern)
 {
   size_t n = str.size();
-  size_t p = pattern.size();
+  size_t m = pattern.size();
   
   std::vector<size_t> offsets;
 
-  for(size_t i = 0; i <= n - p; ++i)
+  if(m == 0)
   {
-    bool match = true;
-    for(size_t j = 0; j < p; ++j)
+    for(size_t i = 0; i < n; ++i) 
+      offsets.push_back(i);
+    return offsets;
+  }
+
+  for(size_t i = 0; i <= n - m; ++i)
+  {
+    size_t j = 0;
+    for(; j < m; ++j)
     {
       if(str[i+j] != pattern[j])
-      {
-        match = false;
         break;
-      }
     }
 
-    if(match)
-    {
+    if(j == m)
       offsets.push_back(i);
-    }
   }
 
   return offsets;
