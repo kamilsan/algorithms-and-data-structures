@@ -40,3 +40,7 @@ add_executable(avl
 add_executable(hashset
   hashset/hashset.hpp
   hashset/test.cpp)
+
+add_executable(graph
+  graph/graph.hpp
+  graph/test.cpp)

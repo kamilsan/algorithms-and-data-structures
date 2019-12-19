@@ -29,12 +29,12 @@ The purpose of this repository is to gather implementations of the most popular 
 
   * Graphs:
 
-    - [ ] DFS
-    - [ ] BFS
     - [ ] Dijkstra
     - [ ] Bellman-Ford
     - [ ] A*
     - [ ] Floyd–Warshall
+    - [x] DFS (visitor)
+    - [x] BFS (visitor)
 
   * String searching
 
@@ -65,7 +65,7 @@ The purpose of this repository is to gather implementations of the most popular 
   
   * Other:
 
-    - [ ] Graph
     - [ ] Fibonacci Heap
+    - [x] Graph
     - [x] Priority Queue
     - [x] Binary Heap
